@@ -1,0 +1,31 @@
+
+#####################################
+RTO
+#####################################
+
+It's a multi-region and multi-AZ RDS Database with a read replica configured in standby region. If for some reason let's say Primary DB goes down in a region or AZ at 00:00 hours:
+
+00:00 - Problem occurs
+00:05 - An alert is triggered in 5 minutes
+00:15 - 10 minutes for on-call support personnel to get ready and login
+00:25 - 10 minutes for diagnosis of the issue
+00:40 - 15 minutes for the identification of the root cause
+00:50 - 10 minutes to promote read replica as Primary and redirect traffic
+
+Based on the above steps, estimated recovery time or RTO is 50 minutes approximately.
+
+
+
+#####################################
+RPO
+#####################################
+
+RPO relies on transaction log backups which happens every 5 minutes within AWS RDS. This is in addition to the daily snapshots. So RPO in this case is 5 minutes, if for some reason the data gets corrupted in the Primary DB, it will corrupt the data in Read replica as well. RDS will have to be restored from the last correct transaction log back which was taken 5 minutes ago.
+
+Based on the above explaination RPO is 5 minutes
+
+
+
+
+
+ 

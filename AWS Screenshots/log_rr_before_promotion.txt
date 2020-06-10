@@ -1,0 +1,50 @@
+[root@ip-10-2-10-16 ec2-user]# mysql -h udacity-replica.cllzlma5pevm.us-east-2.rds.amazonaws.com -P 3306 -u admin -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 136
+Server version: 8.0.17 Source distribution
+
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| BooksDB            |
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+4 rows in set (0.00 sec)
+
+mysql> use BooksDB
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_BooksDB |
++-------------------+
+| books             |
++-------------------+
+1 row in set (0.01 sec)
+
+mysql> select * from books;
++---------+-----------------------+------------+--------------+-------------+
+| book_id | title                 | author     | publish_date | description |
++---------+-----------------------+------------+--------------+-------------+
+|       1 | Learn AWS RDS         | John Smith | NULL         | NULL        |
+|       2 | MySQL Tips and Tricks | Mary Jane  | NULL         | NULL        |
++---------+-----------------------+------------+--------------+-------------+
+2 rows in set (0.01 sec)
+
+mysql> INSERT INTO books (title,author) VALUES ('Learn EC2','Jim Robert');
+ERROR 1290 (HY000): The MySQL server is running with the --read-only option so it cannot execute this statement
+mysql>
