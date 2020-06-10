@@ -1,0 +1,1 @@
+All screenshots taken from the AWS Recoverability exercise
